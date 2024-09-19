@@ -2,7 +2,7 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import AppLayouts from "./ui/AppLayouts";
 import Home from "./ui/Home";
 import Cart from "./features/cart/Cart";
-import Order, { action } from "./features/order/order";
+import Order, { action } from "./features/order/CreateOrder";
 import OrderNew, { loader as loadOrder } from "./features/order/OrderNew";
 import { action as actionOrder } from "./features/order/UpdateOrder";
 import Menu, { loader as Menuloader } from "./features/menu/Menu";

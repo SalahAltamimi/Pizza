@@ -2,13 +2,13 @@
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Form, redirect, useNavigation } from "react-router-dom";
-import { apiCreateOrder } from "../../services/apiMenu";
-import { funCurrency } from "../../utils/helpers";
+import { apiCreateOrder } from "../../services/apiMenu.js";
+import { funCurrency } from "../../utils/helpers.js";
 import { store } from "../../store.js";
-import { clearCart } from "../cart/cartSlice";
+import { clearCart } from "../cart/cartSlice.js";
 import CartEmpyt from "../cart/CartEmpyt.jsx";
 import { getLocation } from "../user/userSlice.js";
-function Order() {
+function CreateOrder() {
   const { cart } = useSelector((store) => store.cartSlice);
   const { user, address, loader, error } = useSelector(
     (store) => store.userSlice
@@ -96,6 +96,7 @@ function Order() {
     </Form>
   );
 }
+export default CreateOrder;
 
 export async function action({ request }) {
   const formData = await request.formData();
@@ -109,5 +110,3 @@ export async function action({ request }) {
   if (order.id) store.dispatch(clearCart());
   return redirect(`/order/${order.id}`);
 }
-
-export default Order;
