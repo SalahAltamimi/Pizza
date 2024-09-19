@@ -1,7 +1,7 @@
 // Test ID: IIDSAT
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Form, redirect, useNavigation } from "react-router-dom";
+import { Form, redirect, useNavigate, useNavigation } from "react-router-dom";
 import { apiCreateOrder } from "../../services/apiMenu.js";
 import { funCurrency } from "../../utils/helpers.js";
 import { store } from "../../store.js";
@@ -17,8 +17,16 @@ function CreateOrder() {
   const totalPrice = cart.reduce((a, b) => a + b.totalPrice, 0);
   const totalPrices = priority ? totalPrice * 1.2 : totalPrice;
   const navigation = useNavigation();
+  const navigate = useNavigate();
   const dispatch = useDispatch();
   const loading = navigation.state === "loading";
+  useEffect(
+    function () {
+      if (!user) navigate("/");
+    },
+    [user, navigate]
+  );
+
   if (!cart.length) return <CartEmpyt />;
   return (
     <Form method="POST" className="py-16 px-6 flex flex-col">
